@@ -1,0 +1,51 @@
+Ant Quick Summary
+
+Types of class
+
+- Place: a place holds insects and has an exite to another place
+	- Hive(Place): The Place from which the Bees launch their assault
+	- Water(Place): Water is a place that can only hold 'watersafe' insect
+
+
+- Insect: An Insect, the base class of Ant and Bee, has armor and a Place.
+	- Bee(Insect): A Bee mvoes form place to place, following exits and stinging ants.
+	- Ant(Insect): An Ant occupies a place and does work for the colony.
+		- HarvestAnt(Ant): HarvesterAnt produces 1 additional food per turn for the cology
+		- ThrowerAnt(Ant): ThrowerAnt throws a leaf each turn at the nearest Bee in its range.
+			- SlowThrower(ThrowerAnt): ThrowerAnt that causes Slow on Bees.
+			- StunThrower(ThrowerAnt): ThrowerAnt that causes Stun on Bees.
+			- LongThrower(ThrowerAnt): A ThrowerAnt that only throws leaves at Bees at least 4 places away.
+			- ShortThrower(ThrowerAnt): A ThrowerAnt that only throws leaves at Bees within 3 places.
+		- FireAnt(Ant): FireAnt cooks any Bee in its Place when it expires.- NinjaAnt(Ant): NinjaAnt is an Ant which does not block the paqth and does 1 damage to all Bees in the exact same Place.
+		- HungryAnt(Ant): HungryAnt will take three "turns" to eat a Bee in the same space as it. While eating, the HungryAnt can't eat another Bee.
+		- BodyguardAnt(Ant): BodyguardAnt provides protection to other Ants
+		- AntRemover(ant): Allows the player to remove ants from the board in the GUI
+
+- AntColony: An ant collective that manages global game state and simulates time.
+
+- AssaultPlan: The Bees' plan of attach for the Colony. Attacks come in timed wave.
+
+- QueenPlace: A place that represents both places in which the bees find the queen
+- QueenAnt: The Queen of the cology. The game is over if a bee enters her place
+
+**************************************************************************
+Question 1
+
+1. Which method in which class runs a game? (the answer is not run, because run is not a method)!
+- a method called simulate in the AntColony class.
+
+2. The Hive, a subclass of Place, is the starting location of the bees. Unlike most instances of Place, the Hive class does not have an exit. Explain how and when Bees leave the Hive.
+- With in different AssaultPlan the bees leave the Hive in timely manner.
+
+3. Explain the mechanism in the code by which the places in the colony are laid out. How do you modify the code to produce more places?
+- The size of the grid is defined by parameters to the mix_layout function
+
+4. What is the significance of an Insect's armor attribute? What happens when armor reaches 0?
+- armor is a value representing how strong the ant is. The ant vanish if its armor reaches zero.
+once at 0, remove_insect
+
+5. Both Ants and Bees inherit from the Insect class. What does this mean? What similarities and differences are there between Ants and Bees?
+- Ants and Bees are both Insect objects and have intrinsic definition of armor and place. Also both can perform the mothod of reduce_armor and actions. Bees have more mothods defined in its class, whereas Ants is a more general class and ants for different actions were defined seperately.
+
+6. Locate the Ant class. Identify an Ant's class attributes and instance attributes. What is the difference between the two?
+- class attribute: implemented, damage, food_cost; any change of these attributes will change the status of future Ant objects. Instance attributes: armor, the armor of one one is independent of the others.
